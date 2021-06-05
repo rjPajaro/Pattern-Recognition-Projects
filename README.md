@@ -7,7 +7,7 @@ This is a repository filled with homeworks and projects given to us in our Patte
 
 Instructions:
  - Develop a content-based recommendation system using python program.
- - Apply Cosine Similarity and Jaccard Similarity.
+ - Apply Cosine Similarity.
 
 Dataset:
  - The dataset to be used in this assignment will be the [USDA Diet Nutritional Data](https://www.kaggle.com/haithemhermessi/usda-national-nutrient-database) from kaggle.

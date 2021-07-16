@@ -16,8 +16,11 @@ def instances():
 # in order to calculate the 15th digit which is the check digit (cd) to validate the 
 # IMEI that has been generated.
 def generate_IMEI():
-    imei = randint(10000000000000,99999999999999)
-    imei = list(str(imei))
+    
+    while len(imei) != 14:
+        imei = randint(10000000000000,99999999999999)
+        imei = list(str(imei))
+        
     a = imei.copy()
 
     for i in range(len(a)):

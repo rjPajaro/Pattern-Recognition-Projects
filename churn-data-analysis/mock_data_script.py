@@ -85,7 +85,7 @@ def generate_cell_tower(yn):
         cell_tower = 'NS' # NS = No Service/No cell tower was used, because no call or text was utilized
     return cell_tower
 
-# Random Date Generation (from 2019 - 2021)
+# Random Date Generation
 def generate_date():
     #x = np.random.choice(pd.date_range('2019-01-01','2021-01-01'), 1)
     x = pd.date_range(start='2018-08-15', end='2020-04-05').to_pydatetime().tolist()   
@@ -95,19 +95,20 @@ def generate_weeks():
     generated_dates = generate_date()
     dates = []
     x = 7
-    for i in range(len(generated_dates)):
-        if x == 0:
-            dates.append(generated_dates[i])
-            x = 6
-        else:
-            x-=1
+    while len(dates) == 0:
+        for i in range(len(generated_dates)):
+            if x == 0:
+                dates.append(generated_dates[i])
+                x = 6
+            else:
+                x-=1
     
     start, end = generate_week_start_end()
     return dates[start:end]
 
 def generate_week_start_end():
-    start = randint(4,54)
-    end = randint(20,84)
+    start = randint(0,54)
+    end = randint(64,84)
     return start, end
 
 def generate_apps():

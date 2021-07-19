@@ -1,5 +1,5 @@
 from random import randint
-import datetime
+from datetime import datetime
 import random
 import numpy as np
 import pandas as pd
@@ -16,7 +16,7 @@ def instances():
 # in order to calculate the 15th digit which is the check digit (cd) to validate the 
 # IMEI that has been generated.
 def generate_IMEI():
-    
+    imei = []
     while len(imei) != 14:
         imei = randint(10000000000000,99999999999999)
         imei = list(str(imei))
@@ -87,8 +87,28 @@ def generate_cell_tower(yn):
 
 # Random Date Generation (from 2019 - 2021)
 def generate_date():
-    x = np.random.choice(pd.date_range('2019-01-01','2021-01-01'), 1)
-    return x[0]
+    #x = np.random.choice(pd.date_range('2019-01-01','2021-01-01'), 1)
+    x = pd.date_range(start='2018-08-15', end='2020-04-05').to_pydatetime().tolist()   
+    return x
+
+def generate_weeks():
+    generated_dates = generate_date()
+    dates = []
+    x = 7
+    for i in range(len(generated_dates)):
+        if x == 0:
+            dates.append(generated_dates[i])
+            x = 6
+        else:
+            x-=1
+    
+    start, end = generate_week_start_end()
+    return dates[start:end]
+
+def generate_week_start_end():
+    start = randint(4,54)
+    end = randint(20,84)
+    return start, end
 
 def generate_apps():
     apps = ['youtube'
@@ -125,19 +145,23 @@ def generate_num_of_hrs():
 # Average Monthly Load Generation (? this might be changed)
 def generate_avg_load():
     return randint(11,473)
+
+def generate_credit_load():
+    credit = [20,30,50,70,90,100,150,200,300,500,800,1000]
+    return random.choice([0,random.choice(credit)])
     
 # Mobile Data Usage Generation
 def generate_md_usage():
-    x = round(random.uniform(0.1, 5.0), 2)
+    x = round(random.uniform(5.0, 9.0), 2)
     return x
+
+def generate_promos():
+    return randint(0,randint(1,6))
 
 # Active Time Generation
 def generate_active_time():
-    x = randint(0,1)
-    if x == 0:
-        return 'day'
-    else:
-        return 'night'
+    activity_time = [0,1,2]
+    return random.choice(activity_time)
     
     
 

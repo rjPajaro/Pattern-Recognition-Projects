@@ -244,16 +244,48 @@ class mock_data_generation():
         for _ in range(len(weeks)):
             IMEIs.append(ids)
         
-        for i in range(len(df.columns)):
-            # change credits loaded
-            credits = df[df.columns[i]].values.tolist()
-            credit_list = [0,20,30,50,70,90,100,150,200,300,500,800,1000]
+        df_cols = df.columns[2:6].tolist()
+        for i in range(len(df_cols)):
+            df_vals = df[df_cols[i]].values.tolist()
             
-            for i in range(len(credits)):
-                cl_pos = randint(credit_list.index(credits[i])+randint(1,2),credit_list.index(credits[i])-randint(1,2))#randint(0,)
-                if cl_pos <= 0:
-                    cl_pos = 0
-                credits_loaded.append(credit_list[cl_pos])
+            # change credits loaded
+            if df_cols[i] == df_cols[0]:
+                credit_list = [0,20,30,50,70,90,100,150,200,300,500,800,1000]
+                for i in range(len(df_vals)):
+                    pos = randint(0,2)
+                    if pos == 0:
+                        cl_pos = credit_list.index(df_vals[i])+randint(1,2) # add 1 or 2 indices
+                    elif pos == 1:
+                        cl_pos = credit_list.index(df_vals[i])-randint(1,2) # sub 1 or 2 indices
+                    elif pos == 2:
+                        cl_pos = df_vals[i] # no change
+                        
+                    if cl_pos <= 0:
+                        cl_pos = 0
+                    if cl_pos >= len(credit_list):
+                        cl_pos = len(credit_list)-1
+                        
+                    credits_loaded.append(credit_list[cl_pos])
+            # change num of hrs spent on the internet
+            elif df_cols[i] == df_cols[1]:
+                vals = df_vals
+                #random.shuffle(vals)
+                for i in range(len(vals)):
+                    pos = randint(0,2)
+                    if pos == 0:
+                        vals[i] = vals[i] - random.uniform(0.5, 2.5)
+                    elif pos == 1:
+                        vals[i] = vals[i] + random.uniform(0.5,2.5)
+                        
+                    if vals[i] <= 0:
+                        vals[i] = random.uniform(0.5,2.5)
+                    if vals[i] >= 24.0:
+                        vals[i] = 24.0 - random.uniform(0.5, 2.5)
+                        
+                    num_hrs.append(round(vals[i],1))
+            #elif df_cols[i] == df_cols[2]:
+            #elif df_cols[i] == df_cols[3]:
+            #elif df_cols[i] == df_cols[4]:
             
         
         #    col_vals = df[df.columns[i]].value_counts().reset_index().to_numpy().tolist()

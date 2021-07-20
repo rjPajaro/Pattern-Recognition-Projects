@@ -176,6 +176,7 @@ class _mock_behavior():
         x = round(random.uniform(5.0, 9.0), 2)
         return x
 
+    # Promos used Generation
     def generate_promos():
         return randint(0,randint(1,6))
 
@@ -244,7 +245,7 @@ class mock_data_generation():
         for _ in range(len(weeks)):
             IMEIs.append(ids)
         
-        df_cols = df.columns[2:6].tolist()
+        df_cols = df.columns[2:7].tolist()
         for i in range(len(df_cols)):
             df_vals = df[df_cols[i]].values.tolist()
             
@@ -283,18 +284,69 @@ class mock_data_generation():
                         vals[i] = 24.0 - random.uniform(0.5, 2.5)
                         
                     num_hrs.append(round(vals[i],1))
-            #elif df_cols[i] == df_cols[2]:
-            #elif df_cols[i] == df_cols[3]:
-            #elif df_cols[i] == df_cols[4]:
+            # change mobile data usage
+            elif df_cols[i] == df_cols[2]:
+                vals = df_vals
+                #random.shuffle(vals)
+                for i in range(len(vals)):
+                    pos = randint(0,2)
+                    if pos == 0:
+                        vals[i] = vals[i] - random.uniform(0.1, 2.9)
+                    elif pos == 1:
+                        vals[i] = vals[i] + random.uniform(0.1,2.9)
+                        
+                    if vals[i] <= 0:
+                        vals[i] = random.uniform(0.1,2.9)
+                    if vals[i] >= 24.0:
+                        vals[i] = 24.0 - random.uniform(0.1, 2.9)
+                        
+                    mdu.append(round(vals[i],1))
+            # change promos
+            elif df_cols[i] == df_cols[3]:
+                credit_list = [i for i in range(7)] # list with numbers 0-6
+                for i in range(len(df_vals)):
+                    pos = randint(0,2)
+                    if pos == 0:
+                        cl_pos = credit_list.index(df_vals[i])+randint(1,2) # add 1 or 2 indices
+                    elif pos == 1:
+                        cl_pos = credit_list.index(df_vals[i])-randint(1,2) # sub 1 or 2 indices
+                    elif pos == 2:
+                        cl_pos = df_vals[i] # no change
+                        
+                    if cl_pos <= 0:
+                        cl_pos = 0
+                    if cl_pos >= len(credit_list):
+                        cl_pos = len(credit_list)-1
+                        
+                    promos.append(credit_list[cl_pos])
+                print(df_cols[4])
+            # change active times
+            elif df_cols[i] == df_cols[4]:
+                credit_list = [i for i in range(3)] # list with numbers 0-2
+                for i in range(len(df_vals)):
+                    pos = randint(0,2)
+                    if pos == 0:
+                        cl_pos = credit_list.index(df_vals[i])+randint(1,2) # add 1 or 2 indices
+                    elif pos == 1:
+                        cl_pos = credit_list.index(df_vals[i])-randint(1,2) # sub 1 or 2 indices
+                    elif pos == 2:
+                        cl_pos = df_vals[i] # no change
+                        
+                    if cl_pos <= 0:
+                        cl_pos = 0
+                    if cl_pos >= len(credit_list):
+                        cl_pos = len(credit_list)-1
+                        
+                    times.append(credit_list[cl_pos])
             
-        
+        active = [0 for i in range(len(df))]
+            
         #    col_vals = df[df.columns[i]].value_counts().reset_index().to_numpy().tolist()
         #    val_sh = [x[1] for x in col_vals]
         #    random.shuffle(val_sh)
         #    for j in range(len(col_vals)):
         #        col_vals[j][1] = val_sh[j]
 
-        
         return weeks, IMEIs, credits_loaded, num_hrs, mdu, promos, times, active
 
 

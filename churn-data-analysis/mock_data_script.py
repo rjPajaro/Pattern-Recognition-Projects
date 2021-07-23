@@ -169,7 +169,7 @@ class _mock_behavior():
 
     def generate_credit_load():
         credit = [20,30,50,70,90,100,150,200,300,500,800,1000]
-        return random.choice([0,random.choice(credit)])
+        return random.choice([0,(random.choice(credit))])
         
     # Mobile Data Usage Generation
     def generate_md_usage():
@@ -178,7 +178,7 @@ class _mock_behavior():
 
     # Promos used Generation
     def generate_promos():
-        return randint(0,randint(1,6))
+        return randint(0,10)
 
     # Active Time Generation
     def generate_active_time():
@@ -191,7 +191,9 @@ class mock_data_generation():
         weeks = _mock_behavior.generate_weeks(0)
 
         ids = _id_generation.generate_IMEI()
+        pn = _id_generation.generate_PN()
         IMEIs = []
+        phone_nums = []
         credits_loaded = []
         num_hrs = []
         mdu = []
@@ -201,6 +203,7 @@ class mock_data_generation():
 
         for _ in range(len(weeks)):
             IMEIs.append(ids)
+            phone_nums.append(pn)
 
             credit = _mock_behavior.generate_credit_load()
             hrs = _mock_behavior.generate_num_of_hrs()
@@ -229,12 +232,14 @@ class mock_data_generation():
                 times[i] = 0
                 active[i] = 1
 
-        return weeks, IMEIs, credits_loaded, num_hrs, mdu, promos, times, active
+        return weeks, IMEIs, phone_nums, credits_loaded, num_hrs, mdu, promos, times, active
 
     def mock_rc_data(w,l,df):
         weeks = _mock_behavior.generate_rc_weeks(w,l)
         ids = _id_generation.generate_IMEI()
+        pn = _id_generation.generate_PN()
         IMEIs = []
+        phone_nums = []
         credits_loaded = []
         num_hrs = []
         mdu = []
@@ -244,8 +249,9 @@ class mock_data_generation():
         
         for _ in range(len(weeks)):
             IMEIs.append(ids)
+            phone_nums.append(pn)
         
-        df_cols = df.columns[2:7].tolist()
+        df_cols = df.columns[3:8].tolist()
         for i in range(len(df_cols)):
             df_vals = df[df_cols[i]].values.tolist()
             
@@ -303,7 +309,7 @@ class mock_data_generation():
                     mdu.append(round(vals[i],1))
             # change promos
             elif df_cols[i] == df_cols[3]:
-                credit_list = [i for i in range(7)] # list with numbers 0-6
+                credit_list = [i for i in range(11)] # list with numbers 0-6
                 for i in range(len(df_vals)):
                     pos = randint(0,2)
                     if pos == 0:
@@ -347,7 +353,7 @@ class mock_data_generation():
         #    for j in range(len(col_vals)):
         #        col_vals[j][1] = val_sh[j]
 
-        return weeks, IMEIs, credits_loaded, num_hrs, mdu, promos, times, active
+        return weeks, IMEIs, phone_nums, credits_loaded, num_hrs, mdu, promos, times, active
 
 
 

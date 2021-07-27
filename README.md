@@ -67,16 +67,17 @@ About:
  - Our task for this assignment is to explore PyCaret and its applications for easing ML tasks such as comparison with other ML algorithms, as well as hyperparameter tuning.
 
 
-## Sixth Assignment | Rotational Churners - Mock Data Creation, Data Analysis, Prediction(?) (Proof of Concept)
+## Sixth Assignment | Rotational Churners - Mock Data Creation and Data Analysis (Proof of Concept)
 
 Instructions:
  - Create a dataset that simulates rotational churners.
  - Create analysis on how a telco company would identify customers who are rotational churners.
 
 Dataset:
- - *in the process of making a mock dataset atm*
+ - ..\data\mock\sample_mock_c_data.xlsx (mock data of churners)
+ - ..\data\mock\sample_mock_rc_data.xlsx (mock data of rotational churners)
 
 About:
- - Rotational churners are repeat customers that churns/stops the use of a product of a telco company and re-applies/re-continues the use of their services.
- - In the Philippines, phone numbers can either be registered (postpaid) which requires a person to fill up forms and their credentials will be put in the telco companies' databases, or unregistered (prepaid) which are SIM cards that can be bought at certain marts or stalls at any time with no registration required.
- - This task focuses on identifying prepaid users that could possibly be rotational churners from given data (which we have to create).
+ - Rotational churners are repeat customers that churns/stops the use of a product of a telco company and re-applies/re-continues the use of their services later in the future.
+ - In the Philippines, phone numbers can either be registered (postpaid) which requires a person to fill up forms and their credentials will be put in the telco companies' databases, or unregistered (prepaid) which are SIM cards that can be bought at certain marts or stalls at any time with no registration required. 
+ - Mock Data Background: ```sample_mock_c_data.xlsx``` is a collection of weekly churner data of a fictional telco company from 2017 up until 2019. ```sample_mock_rc_data.xlsx```is a collection of weekly user data from 2020-Present who could possibly be rotational churners for the same telco company. The hypothesis for the analysis of datas are that rotational churners could/would have similar patterns and behavior regarding their use of prepaid services (the credits they load, frequency of spent time on their phones, etc). The task is to identify which users could possibly be rotational churners using statistical analysis or machine learning concepts if possible.

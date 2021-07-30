@@ -280,14 +280,14 @@ class mock_data_generation():
                 for i in range(len(vals)):
                     pos = randint(0,2)
                     if pos == 0:
-                        vals[i] = vals[i] - random.uniform(0.5, 2.5)
+                        vals[i] = vals[i] - random.uniform(0.5, 1.3)
                     elif pos == 1:
-                        vals[i] = vals[i] + random.uniform(0.5,2.5)
+                        vals[i] = vals[i] + random.uniform(0.5,1.3)
                         
                     if vals[i] <= 0:
-                        vals[i] = random.uniform(0.5,2.5)
+                        vals[i] = random.uniform(0.5,1.3)
                     if vals[i] >= 24.0:
-                        vals[i] = 24.0 - random.uniform(0.5, 2.5)
+                        vals[i] = 24.0 - random.uniform(0.5, 1.3)
                         
                     num_hrs.append(round(vals[i],1))
             # change mobile data usage
@@ -297,14 +297,14 @@ class mock_data_generation():
                 for i in range(len(vals)):
                     pos = randint(0,2)
                     if pos == 0:
-                        vals[i] = vals[i] - random.uniform(0.1, 2.9)
+                        vals[i] = vals[i] - random.uniform(0.1, 1.3)
                     elif pos == 1:
-                        vals[i] = vals[i] + random.uniform(0.1,2.9)
+                        vals[i] = vals[i] + random.uniform(0.1,1.3)
                         
                     if vals[i] <= 0:
-                        vals[i] = random.uniform(0.1,2.9)
+                        vals[i] = random.uniform(0.1,1.3)
                     if vals[i] >= 24.0:
-                        vals[i] = 24.0 - random.uniform(0.1, 2.9)
+                        vals[i] = 24.0 - random.uniform(0.1, 1.3)
                         
                     mdu.append(round(vals[i],1))
             # change promos
